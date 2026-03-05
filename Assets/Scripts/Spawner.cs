@@ -4,14 +4,17 @@ public class Spawner : MonoBehaviour
 {
     public Transform enemyPrefab;
     public float timeBetweenWaves = 2f;
+
+    public Base destination;
     private float countdown = 0f;
 
     void Update()
     {
-        if (countdown <= 0)
+        if (countdown <= 0f)
         {
             SpawnEnemy();
             countdown = timeBetweenWaves;
+            return;
         }
 
         countdown -= Time.deltaTime;
@@ -19,6 +22,8 @@ public class Spawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Instantiate(enemyPrefab, transform.position, transform.rotation);
+        Transform enemyTransform = Instantiate(enemyPrefab, transform.position, transform.rotation);
+        Enemy enemy = enemyTransform.GetComponent<Enemy>();
+        enemy.Initialise(destination);
     }
 }
