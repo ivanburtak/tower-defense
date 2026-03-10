@@ -3,39 +3,25 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    public int health = 20;
-    public Transform waypoints;
-    public Transform[] path
+    public static Base Instance { get; private set; }
+
+    [SerializeField] private int health = 20;
+    [SerializeField] private TextMeshProUGUI healthText;
+
+    void Awake()
     {
-        get;
-        private set;
+        Instance = this;
     }
-    public TextMeshProUGUI healthText;
 
     void Start()
     {
         healthText.text = health.ToString();
-
-        path = new Transform[waypoints.childCount + 1];
-        for (int i = 0; i < waypoints.childCount; i++)
-        {
-            path[i] = waypoints.GetChild(i);
-        }
-        path[^1] = transform;
     }
 
     public bool GetHit(int damage)
     {
-        if (health <= damage)
-        {
-            health = 0;
-            healthText.text = "0";
-            return true;
-        }
-
-        health -= damage;
+        health = Mathf.Max(0, health - damage);
         healthText.text = health.ToString();
-
-        return false;
+        return health == 0;
     }
 }

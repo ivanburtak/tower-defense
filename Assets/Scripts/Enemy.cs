@@ -2,48 +2,53 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 1;
-    public int health = 20;
-    private Base destination;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private int health = 3;
+
     private Transform target;
-    private int pathIndex = 0;
-
-    public void Initialise(Base destination)
+    public int pathIndex
     {
-        this.destination = destination;
-        target = destination.path[0];
-    }
+        get;
+        private set;
+    } = 0;
 
+    void Start()
+    {
+        target = Waypoints.path[0];
+    }
 
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         if (transform.position == target.position)
-        {
             NextWaypoint();
-        }
     }
 
     void NextWaypoint()
     {
         pathIndex++;
-        if (pathIndex == destination.path.Length)
+        if (pathIndex == Waypoints.path.Length)
         {
-            destination.GetHit(damage);
-            Destroy(gameObject);
+            Base.Instance.GetHit(damage);
+            Spawner.Instance.DestroyEnemy(this);
             return;
         }
 
-        target = destination.path[pathIndex];
+        target = Waypoints.path[pathIndex];
+    }
+
+    public float GetDistanceToWaypoint()
+    {
+        return Vector3.Distance(target.position, transform.position);
     }
 
     public bool GetHit(int damage)
     {
         if (health <= damage)
         {
-            Destroy(gameObject);
+            Spawner.Instance.DestroyEnemy(this);
             return true;
         }
 
