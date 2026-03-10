@@ -91,7 +91,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 177c876383af5c34d9c037d4ac828a26, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,4 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362fd2346c0be224d96e4fc0f2ff636c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  projectilePrefab: {fileID: 0}
+  fireTransform: {fileID: 0}
   range: 0
+  fireRate: 1
+  rotationSpeed: 180
+  projectileSpeed: 30
+  projectileDamage: 1
