@@ -50,6 +50,8 @@ public class Enemy : MonoBehaviour
 
         if (transform.position == target.position)
             NextWaypoint();
+
+        spriteRenderer.sortingOrder = -(int)(transform.position.y * 10);
     }
 
     void NextWaypoint()
