@@ -1,67 +1,63 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform fireTransform;
-
-    [Header("Attributes")]
-    [SerializeField] private float range = 20f;
-    [SerializeField] private float fireRate = 1f;
-    [SerializeField] private float rotationSpeed = 180f; // degrees per second
-    [SerializeField] private float projectileSpeed = 30f;
-    [SerializeField] private int projectileDamage = 1;
-
-
+    public TowerData data;
     private Enemy target;
     private float fireCountdown = 0f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
     }
 
     void UpdateTarget()
     {
-        for (int i = Spawner.enemies.Count - 1; i >= 0; i--)
-        {
-            Enemy enemy = Spawner.enemies[i];
+        Enemy best = null;
+        int bestIndex = -1;
+        float bestDistance = 0;
 
-            // Enemies are already sorted from furtherest to closest to the base
-            // If we iterate backwards we always get the closest enemy
-            // The only question is whether the enemy is within the tower's range
-            if (Vector3.Distance(enemy.transform.position, transform.position) <= range)
+        foreach (var enemy in WaveManager.Instance.ActiveEnemies)
+        {
+            if (Vector3.Distance(enemy.transform.position, transform.position) > data.range)
+                continue;
+
+            if (enemy.PathIndex < bestIndex) continue;
+
+            float distance = Vector3.Distance(enemy.transform.position, Waypoints.Path[enemy.PathIndex].transform.position);
+            if (enemy.PathIndex == bestIndex)
             {
-                target = enemy;
-                return;
+                if (distance < bestDistance)
+                {
+                    best = enemy;
+                    bestDistance = distance;
+                }
+                continue;
             }
+            // e.PathIndex > bestIndex
+            best = enemy;
+            bestIndex = enemy.PathIndex;
+            bestDistance = distance;
         }
 
-        target = null;
+        target = best;
     }
 
     void Update()
     {
-        if (target == null)
-            return;
+        if (target == null) return;
 
-        float step = rotationSpeed * Time.deltaTime;
-
+        float step = data.rotationSpeed * Time.deltaTime;
         Vector3 dir = target.transform.position - transform.position;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
-
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, targetAngle), step);
 
-
         float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle);
-        float tolerance = 5f;
 
-        if (fireCountdown <= 0f && Mathf.Abs(angleDiff) < tolerance)
+        if (fireCountdown <= 0f && Mathf.Abs(angleDiff) < 5f)
         {
             Shoot();
-            fireCountdown = 1f / fireRate;
+            fireCountdown = 1f / data.fireRate;
         }
 
         fireCountdown -= Time.deltaTime;
@@ -69,14 +65,8 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject obj = Instantiate(projectilePrefab, fireTransform.position, fireTransform.rotation);
+        GameObject obj = ProjectilePool.Instance.Get(data.projectilePrefab, transform.position);
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Initialise(target, projectileSpeed, projectileDamage);
+        projectile.Initialise(target, data.projectileSpeed, data.damage, data.aoeRadius, data.slowAmount, data.projectilePrefab);
     }
-
-    // void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawWireSphere(transform.position, range);
-    // }
 }

@@ -1,26 +1,45 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private int damage = 1;
-    [SerializeField] private int health = 3;
+    public EnemyData data;
 
+    private float currentSpeed;
+    private int currentHealth;
     private Transform target;
-    public int pathIndex
-    {
-        get;
-        private set;
-    } = 0;
+    private float slowTimer;
+    private bool isSlowed;
 
-    void Start()
+    public int PathIndex { get; private set; } = 0;
+
+    public void ResetTo(EnemyData data)
     {
-        target = Waypoints.path[0];
+        this.data = data;
+        currentSpeed = data.speed;
+        currentHealth = data.health;
+        slowTimer = 0f;
+        isSlowed = false;
+
+        PathIndex = 0;
+        target = Waypoints.Path[0];
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+        if (isSlowed)
+        {
+            slowTimer -= Time.deltaTime;
+
+            if (slowTimer <= 0f)
+            {
+                currentSpeed = data.speed;
+                isSlowed = false;
+            }
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, target.position, currentSpeed * Time.deltaTime);
 
         if (transform.position == target.position)
             NextWaypoint();
@@ -28,15 +47,14 @@ public class Enemy : MonoBehaviour
 
     void NextWaypoint()
     {
-        pathIndex++;
-        if (pathIndex == Waypoints.path.Length)
+        PathIndex++;
+        if (PathIndex == Waypoints.Path.Length)
         {
-            Base.Instance.GetHit(damage);
-            Spawner.Instance.DestroyEnemy(this);
+            Base.Instance.GetHit(data.damage);
+            WaveManager.Instance.OnEnemyDied(this);
             return;
         }
-
-        target = Waypoints.path[pathIndex];
+        target = Waypoints.Path[PathIndex];
     }
 
     public float GetDistanceToWaypoint()
@@ -46,14 +64,23 @@ public class Enemy : MonoBehaviour
 
     public bool GetHit(int damage)
     {
-        if (health <= damage)
+        if (currentHealth <= damage)
         {
-            Spawner.Instance.DestroyEnemy(this);
+            Economy.Instance.Earn(data.reward);
+            WaveManager.Instance.OnEnemyDied(this);
             return true;
         }
-
-        health -= damage;
-
+        currentHealth -= damage;
         return false;
+    }
+
+
+    public void ApplySlow(float amount, float duration)
+    {
+        if (data.isImmuneToSlow) return;
+
+        currentSpeed = data.speed * (1f - amount);
+        slowTimer = duration;
+        isSlowed = true;
     }
 }

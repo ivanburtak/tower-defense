@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public static Transform[] path
+    public static Transform[] Path
     {
         get;
         private set;
@@ -11,10 +10,10 @@ public class Waypoints : MonoBehaviour
 
     void Awake()
     {
-        path = new Transform[transform.childCount];
+        Path = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
-            path[i] = transform.GetChild(i);
+            Path[i] = transform.GetChild(i);
         }
     }
 }

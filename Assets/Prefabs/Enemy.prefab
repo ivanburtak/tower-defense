@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 3029233215996838303}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 40, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,6 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cac9f8d3bbd5f46a065979f3fbe37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  speed: 10
-  damage: 1
-  health: 3
+  data: {fileID: 0}

@@ -5,35 +5,59 @@ public class Projectile : MonoBehaviour
     private Enemy target;
     private float speed;
     private int damage;
+    private float aoeRadius;
+    private float slowAmount;
     private Vector3 targetPosition;
-    public void Initialise(Enemy target, float speed, int damage)
+    private GameObject prefabSource;
+
+    public void Initialise(Enemy target, float speed, int damage, float aoeRadius, float slowAmount, GameObject prefabSource)
     {
         this.target = target;
         this.speed = speed;
         this.damage = damage;
+        this.aoeRadius = aoeRadius;
+        this.slowAmount = slowAmount;
+        this.prefabSource = prefabSource;
+        targetPosition = Vector3.zero;
+    }
+
+    void ReturnToPool()
+    {
+        ProjectilePool.Instance.Return(this, prefabSource);
     }
 
     void MoveTowardsEnemyPosition()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
+
+    void HitSingle(Enemy enemy)
+    {
+        enemy.GetHit(damage);
+        if (slowAmount > 0f)
+            enemy.ApplySlow(slowAmount, 2f);
+    }
+
+    void Explode()
+    {
+        var enemiesSnapshot = WaveManager.Instance.ActiveEnemies.ToArray();
+        foreach (var enemy in enemiesSnapshot)
+        {
+            if (Vector3.Distance(enemy.transform.position, transform.position) <= aoeRadius)
+                HitSingle(enemy);
+        }
+    }
+
     void Update()
     {
         if (target == null)
         {
-            // Test: Possible edgecase of target being null before the first update?
-            // if (targetPosition == null)
-            // {
-            //     Destroy(gameObject);
-            //     return;
-            // }
-
-            // It would be stupid if projectile just disappears, instead home at the target's last position
             MoveTowardsEnemyPosition();
-
             if (transform.position == targetPosition)
-                Destroy(gameObject);
-
+            {
+                if (aoeRadius > 0f) Explode();
+                ReturnToPool();
+            }
             return;
         }
 
@@ -42,8 +66,9 @@ public class Projectile : MonoBehaviour
 
         if (transform.position == targetPosition)
         {
-            Destroy(gameObject);
-            target.GetHit(damage);
+            if (aoeRadius > 0f) Explode();
+            else HitSingle(target);
+            ReturnToPool();
         }
     }
 }

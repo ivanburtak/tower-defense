@@ -22,6 +22,11 @@ public class Base : MonoBehaviour
     {
         health = Mathf.Max(0, health - damage);
         healthText.text = health.ToString();
-        return health == 0;
+        if (health == 0)
+        {
+            GameManager.Instance.OnBaseDead();
+            return true;
+        }
+        return false;
     }
 }
