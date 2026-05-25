@@ -52,7 +52,7 @@ public class WaveManager : MonoBehaviour
 
     void SpawnEnemy(EnemyData data)
     {
-        GameObject obj = EnemyPool.Instance.Get(data.prefab, spawnLocation.transform.position);
+        GameObject obj = EnemyPool.Instance.Get(spawnLocation.transform.position);
         Enemy enemy = obj.GetComponent<Enemy>();
         enemy.ResetTo(data);
         ActiveEnemies.Add(enemy);
@@ -61,6 +61,6 @@ public class WaveManager : MonoBehaviour
     public void OnEnemyDied(Enemy enemy)
     {
         ActiveEnemies.Remove(enemy);
-        EnemyPool.Instance.Return(enemy.gameObject, enemy.data.prefab);
+        EnemyPool.Instance.Return(enemy.gameObject);
     }
 }

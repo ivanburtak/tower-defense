@@ -967,6 +967,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7fd49c87d140d4a853e8f69e45512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
+  enemyPrefab: {fileID: 3029233215996838303, guid: cafacc2962e1de449869aed3a42784c5, type: 3}
+  poolSize: 60
 --- !u!114 &272122971
 MonoBehaviour:
   m_ObjectHideFlags: 0

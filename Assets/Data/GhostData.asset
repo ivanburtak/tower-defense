@@ -19,4 +19,7 @@ MonoBehaviour:
   speed: 0.8
   damage: 1
   isImmuneToSlow: 1
-  prefab: {fileID: 3029233215996838303, guid: d89cc37839632d04f949e3fd1b8cac55, type: 3}
+  moveRight: {fileID: 0}
+  moveLeft: {fileID: 0}
+  moveUp: {fileID: 0}
+  moveDown: {fileID: 357006442158401228, guid: 1c8518a58dacdfb4ab03453211aeda8d, type: 3}

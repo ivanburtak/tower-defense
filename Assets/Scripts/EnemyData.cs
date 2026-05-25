@@ -10,5 +10,8 @@ public class EnemyData : ScriptableObject
     public float speed;
     public int damage;
     public bool isImmuneToSlow;
-    public GameObject prefab;
+    public Sprite moveRight;
+    public Sprite moveLeft;
+    public Sprite moveUp;
+    public Sprite moveDown;
 }

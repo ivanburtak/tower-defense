@@ -14,10 +14,6 @@ public class Enemy : MonoBehaviour
     public int PathIndex { get; private set; } = 0;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite moveRight;
-    [SerializeField] private Sprite moveLeft;
-    [SerializeField] private Sprite moveUp;
-    [SerializeField] private Sprite moveDown;
 
     public void ResetTo(EnemyData data)
     {
@@ -72,9 +68,9 @@ public class Enemy : MonoBehaviour
         Vector3 dir = target.position - transform.position;
 
         if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
-            spriteRenderer.sprite = dir.x > 0 ? moveRight : moveLeft;
+            spriteRenderer.sprite = dir.x > 0 ? data.moveRight : data.moveLeft;
         else
-            spriteRenderer.sprite = dir.y > 0 ? moveUp : moveDown;
+            spriteRenderer.sprite = dir.y > 0 ? data.moveUp : data.moveDown;
     }
 
     public float GetDistanceToWaypoint()

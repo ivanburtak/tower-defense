@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1383575905321262004}
   - component: {fileID: 6944580359438948385}
   m_Layer: 0
-  m_Name: Ghost
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_Size: {x: 0.87, y: 1.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6944580359438948385
 MonoBehaviour:
@@ -106,7 +106,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   data: {fileID: 0}
   spriteRenderer: {fileID: 1383575905321262004}
-  moveRight: {fileID: -4345969612696422427, guid: 06ec961370ae4984bb06009ab5012129, type: 3}
-  moveLeft: {fileID: -2208510542369132325, guid: 2517c649d0ae8804591a8a94a753995a, type: 3}
-  moveUp: {fileID: 2455513822275430761, guid: c4159977f7176e2459622fdcfd57900c, type: 3}
-  moveDown: {fileID: 357006442158401228, guid: 1c8518a58dacdfb4ab03453211aeda8d, type: 3}

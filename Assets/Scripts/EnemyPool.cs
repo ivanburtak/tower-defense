@@ -4,29 +4,33 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     public static EnemyPool Instance { get; private set; }
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private int poolSize = 60;
 
-    private readonly Dictionary<GameObject, Queue<GameObject>> pools = new();
+    private Queue<GameObject> pool = new();
 
-    void Awake() => Instance = this;
-
-    public GameObject Get(GameObject prefab, Vector3 pos)
+    void Awake()
     {
-        if (!pools.ContainsKey(prefab))
-            pools[prefab] = new Queue<GameObject>();
+        Instance = this;
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject obj = Instantiate(enemyPrefab);
+            obj.SetActive(false);
+            pool.Enqueue(obj);
+        }
+    }
 
-        Queue<GameObject> pool = pools[prefab];
-        GameObject obj = pool.Count > 0 ? pool.Dequeue() : Instantiate(prefab);
-        obj.transform.SetPositionAndRotation(pos, Quaternion.identity);
+    public GameObject Get(Vector3 pos)
+    {
+        GameObject obj = pool.Count > 0 ? pool.Dequeue() : Instantiate(enemyPrefab);
+        obj.transform.position = pos;
         obj.SetActive(true);
         return obj;
     }
 
-    public void Return(GameObject obj, GameObject prefab)
+    public void Return(GameObject obj)
     {
-        if (!pools.ContainsKey(prefab))
-            pools[prefab] = new Queue<GameObject>();
-
         obj.SetActive(false);
-        pools[prefab].Enqueue(obj);
+        pool.Enqueue(obj);
     }
 }
