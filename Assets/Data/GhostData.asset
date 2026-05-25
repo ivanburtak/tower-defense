@@ -19,7 +19,7 @@ MonoBehaviour:
   speed: 0.8
   damage: 1
   isImmuneToSlow: 1
-  moveRight: {fileID: 0}
-  moveLeft: {fileID: 0}
-  moveUp: {fileID: 0}
-  moveDown: {fileID: 357006442158401228, guid: 1c8518a58dacdfb4ab03453211aeda8d, type: 3}
+  moveRight: {fileID: 3804052344441610512, guid: 197b5099c61f90048b1bcad9480605c5, type: 3}
+  moveLeft: {fileID: 6877805946922726449, guid: 197b5099c61f90048b1bcad9480605c5, type: 3}
+  moveUp: {fileID: -1547119588211550254, guid: 197b5099c61f90048b1bcad9480605c5, type: 3}
+  moveDown: {fileID: 4448715427215634006, guid: 197b5099c61f90048b1bcad9480605c5, type: 3}
