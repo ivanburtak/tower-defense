@@ -19,7 +19,7 @@ MonoBehaviour:
   projectileSpeed: 20
   damage: 2
   rotationSpeed: 180
-  aoeRadius: 10
+  aoeRadius: 1
   slowAmount: 0
-  prefab: {fileID: 0}
-  projectilePrefab: {fileID: 0}
+  prefab: {fileID: 5367543104791557289, guid: e3b8890cafa84d14e9e6cbbc4d780994, type: 3}
+  projectilePrefab: {fileID: 3594440019013532992, guid: 268bcfbc618506a4fb339bf5f83adfee, type: 3}

@@ -16,6 +16,7 @@ MonoBehaviour:
   cost: 20
   reward: 10
   health: 3
-  speed: 8
+  speed: 0.8
   damage: 1
   isImmuneToSlow: 1
+  prefab: {fileID: 3029233215996838303, guid: cafacc2962e1de449869aed3a42784c5, type: 3}
