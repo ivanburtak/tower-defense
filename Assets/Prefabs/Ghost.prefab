@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1383575905321262004}
   - component: {fileID: 6944580359438948385}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: deeca0f6391cc7c4db120ce233623275, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,14 +80,14 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Sprite: {fileID: -4345969612696422427, guid: 03524606293feab4298731893859ec05, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.87, y: 1.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,3 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   data: {fileID: 0}
+  spriteRenderer: {fileID: 1383575905321262004}
+  moveRight: {fileID: -4345969612696422427, guid: 06ec961370ae4984bb06009ab5012129, type: 3}
+  moveLeft: {fileID: -2208510542369132325, guid: 2517c649d0ae8804591a8a94a753995a, type: 3}
+  moveUp: {fileID: 2455513822275430761, guid: c4159977f7176e2459622fdcfd57900c, type: 3}
+  moveDown: {fileID: 357006442158401228, guid: 1c8518a58dacdfb4ab03453211aeda8d, type: 3}

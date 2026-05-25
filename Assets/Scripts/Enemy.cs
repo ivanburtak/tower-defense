@@ -13,6 +13,12 @@ public class Enemy : MonoBehaviour
 
     public int PathIndex { get; private set; } = 0;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite moveRight;
+    [SerializeField] private Sprite moveLeft;
+    [SerializeField] private Sprite moveUp;
+    [SerializeField] private Sprite moveDown;
+
     public void ResetTo(EnemyData data)
     {
         this.data = data;
@@ -23,6 +29,7 @@ public class Enemy : MonoBehaviour
 
         PathIndex = 0;
         target = Waypoints.Path[0];
+        UpdateSprite();
     }
 
     void Update()
@@ -55,6 +62,17 @@ public class Enemy : MonoBehaviour
             return;
         }
         target = Waypoints.Path[PathIndex];
+        UpdateSprite();
+    }
+
+    void UpdateSprite()
+    {
+        Vector3 dir = target.position - transform.position;
+
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            spriteRenderer.sprite = dir.x > 0 ? moveRight : moveLeft;
+        else
+            spriteRenderer.sprite = dir.y > 0 ? moveUp : moveDown;
     }
 
     public float GetDistanceToWaypoint()

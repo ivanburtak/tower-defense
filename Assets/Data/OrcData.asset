@@ -19,4 +19,4 @@ MonoBehaviour:
   speed: 0.5
   damage: 2
   isImmuneToSlow: 0
-  prefab: {fileID: 3029233215996838303, guid: cafacc2962e1de449869aed3a42784c5, type: 3}
+  prefab: {fileID: 3029233215996838303, guid: 6257c4c2f1cfe8742b2e459b67018f14, type: 3}
