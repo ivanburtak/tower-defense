@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Mage
   cost: 150
-  range: 10
+  range: 3
   fireRate: 0.5
   projectileSpeed: 20
   damage: 2

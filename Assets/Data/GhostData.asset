@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Ghost
   cost: 20
   reward: 10
-  health: 3
+  health: 8
   speed: 0.8
   damage: 1
   isImmuneToSlow: 1

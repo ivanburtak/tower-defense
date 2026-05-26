@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Orc
   cost: 25
   reward: 15
-  health: 10
+  health: 20
   speed: 0.5
   damage: 2
   isImmuneToSlow: 0

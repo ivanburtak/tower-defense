@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Cannon
   cost: 200
-  range: 30
+  range: 10
   fireRate: 0.3
-  projectileSpeed: 20
-  damage: 5
+  projectileSpeed: 30
+  damage: 6
   rotationSpeed: 180
   aoeRadius: 0
   slowAmount: 0

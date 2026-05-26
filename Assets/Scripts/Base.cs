@@ -15,13 +15,13 @@ public class Base : MonoBehaviour
 
     void Start()
     {
-        healthText.text = health.ToString();
+        healthText.text = "Health: " + health.ToString();
     }
 
     public bool GetHit(int damage)
     {
         health = Mathf.Max(0, health - damage);
-        healthText.text = health.ToString();
+        healthText.text = "Health: " + health.ToString();
         if (health == 0)
         {
             GameManager.Instance.OnBaseDead();
