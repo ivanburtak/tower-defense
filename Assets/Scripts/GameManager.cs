@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum GameState { Preparation, Battle, RoundEnd, GameOver }
 
@@ -11,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int totalRounds = 10;
     [SerializeField] private TextMeshProUGUI roundText;
+    [SerializeField] private Button startButton;
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject loseScreen;
 
@@ -25,12 +28,13 @@ public class GameManager : MonoBehaviour
         currentRound++;
         State = GameState.Preparation;
         roundText.text = "Round: " + currentRound;
-        // show a "Start Wave" button in your UI
+        startButton.interactable = true;
     }
 
     public void StartBattle()
     {
         State = GameState.Battle;
+        startButton.interactable = false;
         WaveManager.Instance.StartWave(currentRound);
     }
 
@@ -52,5 +56,10 @@ public class GameManager : MonoBehaviour
     {
         State = GameState.GameOver;
         loseScreen.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
