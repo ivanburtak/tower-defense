@@ -7,7 +7,7 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private int poolSize = 60;
 
-    private Queue<GameObject> pool = new();
+    private readonly Queue<GameObject> pool = new();
 
     void Awake()
     {

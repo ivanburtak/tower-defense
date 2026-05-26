@@ -4,29 +4,33 @@ using UnityEngine;
 public class ProjectilePool : MonoBehaviour
 {
     public static ProjectilePool Instance { get; private set; }
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private int poolSize = 60;
 
-    private readonly Dictionary<GameObject, Queue<GameObject>> pools = new();
+    private readonly Queue<GameObject> pool = new();
 
-    void Awake() => Instance = this;
-
-    public GameObject Get(GameObject prefab, Vector3 pos)
+    void Awake()
     {
-        if (!pools.ContainsKey(prefab))
-            pools[prefab] = new Queue<GameObject>();
+        Instance = this;
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject obj = Instantiate(projectilePrefab);
+            obj.SetActive(false);
+            pool.Enqueue(obj);
+        }
+    }
 
-        Queue<GameObject> pool = pools[prefab];
-        GameObject obj = pool.Count > 0 ? pool.Dequeue() : Instantiate(prefab);
-        obj.transform.SetPositionAndRotation(pos, Quaternion.identity);
+    public GameObject Get(Vector3 pos)
+    {
+        GameObject obj = pool.Count > 0 ? pool.Dequeue() : Instantiate(projectilePrefab);
+        obj.transform.position = pos;
         obj.SetActive(true);
         return obj;
     }
 
-    public void Return(Projectile projectile, GameObject prefab)
+    public void Return(GameObject obj)
     {
-        if (!pools.ContainsKey(prefab))
-            pools[prefab] = new Queue<GameObject>();
-
-        projectile.gameObject.SetActive(false);
-        pools[prefab].Enqueue(projectile.gameObject);
+        obj.SetActive(false);
+        pool.Enqueue(obj);
     }
 }

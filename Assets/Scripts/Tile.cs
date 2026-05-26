@@ -28,7 +28,7 @@ public class Tile : MonoBehaviour
         if (tower != null) return false;
         if (!Economy.Instance.Spend(data.cost)) return false;
 
-        GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(TowerShop.Instance.towerPrefab, transform.position, Quaternion.identity);
         tower = obj.GetComponent<Tower>();
         tower.data = data;
         return true;

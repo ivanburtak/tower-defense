@@ -3,6 +3,7 @@ using UnityEngine;
 public class TowerShop : MonoBehaviour
 {
     public static TowerShop Instance { get; private set; }
+    public GameObject towerPrefab;
 
     [SerializeField] private GameObject panel;
 

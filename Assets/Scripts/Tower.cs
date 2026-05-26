@@ -24,6 +24,8 @@ public class Tower : MonoBehaviour
 
             if (enemy.PathIndex < bestIndex) continue;
 
+            // if (data.slowAmount > 0f && enemy.data.isImmuneToSlow) continue;
+
             float distance = Vector3.Distance(enemy.transform.position, Waypoints.Path[enemy.PathIndex].transform.position);
             if (enemy.PathIndex == bestIndex)
             {
@@ -65,8 +67,8 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject obj = ProjectilePool.Instance.Get(data.projectilePrefab, transform.position);
+        GameObject obj = ProjectilePool.Instance.Get(transform.position);
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Initialise(target, data.projectileSpeed, data.damage, data.aoeRadius, data.slowAmount, data.projectilePrefab);
+        projectile.Initialise(target, data.projectileSpeed, data.damage, data.aoeRadius, data.slowAmount);
     }
 }

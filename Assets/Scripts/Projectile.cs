@@ -8,22 +8,20 @@ public class Projectile : MonoBehaviour
     private float aoeRadius;
     private float slowAmount;
     private Vector3 targetPosition;
-    private GameObject prefabSource;
 
-    public void Initialise(Enemy target, float speed, int damage, float aoeRadius, float slowAmount, GameObject prefabSource)
+    public void Initialise(Enemy target, float speed, int damage, float aoeRadius, float slowAmount)
     {
         this.target = target;
         this.speed = speed;
         this.damage = damage;
         this.aoeRadius = aoeRadius;
         this.slowAmount = slowAmount;
-        this.prefabSource = prefabSource;
         targetPosition = Vector3.zero;
     }
 
     void ReturnToPool()
     {
-        ProjectilePool.Instance.Return(this, prefabSource);
+        ProjectilePool.Instance.Return(gameObject);
     }
 
     void MoveTowardsEnemyPosition()

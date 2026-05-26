@@ -12,7 +12,4 @@ public class TowerData : ScriptableObject
     public float rotationSpeed = 180f;
     public float aoeRadius; // 0.0 = no AoE
     public float slowAmount; // 0.0 to 1.0, e.g. 0.0 = no slow 0.5 = half speed
-
-    public GameObject prefab;
-    public GameObject projectilePrefab;
 }
