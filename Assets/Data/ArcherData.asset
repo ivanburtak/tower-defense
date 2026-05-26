@@ -21,5 +21,5 @@ MonoBehaviour:
   rotationSpeed: 180
   aoeRadius: 0
   slowAmount: 0
-  prefab: {fileID: 5367543104791557289, guid: e3b8890cafa84d14e9e6cbbc4d780994, type: 3}
-  projectilePrefab: {fileID: 3594440019013532992, guid: 268bcfbc618506a4fb339bf5f83adfee, type: 3}
+  towerSprite: {fileID: 5731584507761909605, guid: 2635e80558cbe12469b3add7f29d072d, type: 3}
+  projectileSprite: {fileID: 8618663976898325987, guid: 8c928facdbd251e468b64e9799a3acb7, type: 3}

@@ -844,6 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9801c36617e09408a5e8e21956da0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerShop
+  towerPrefab: {fileID: 5367543104791557289, guid: e3b8890cafa84d14e9e6cbbc4d780994, type: 3}
   panel: {fileID: 230137025}
 --- !u!114 &230137028
 MonoBehaviour:
@@ -993,6 +994,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418daa40067cf464395179d88950b8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
+  projectilePrefab: {fileID: 3594440019013532992, guid: 268bcfbc618506a4fb339bf5f83adfee, type: 3}
+  poolSize: 60
 --- !u!1001 &274371044
 PrefabInstance:
   m_ObjectHideFlags: 0

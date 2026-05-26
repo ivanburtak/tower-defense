@@ -31,6 +31,7 @@ public class Tile : MonoBehaviour
         GameObject obj = Instantiate(TowerShop.Instance.towerPrefab, transform.position, Quaternion.identity);
         tower = obj.GetComponent<Tower>();
         tower.data = data;
+        tower.GetComponent<SpriteRenderer>().sprite = data.towerSprite;
         return true;
     }
 }

@@ -9,14 +9,23 @@ public class Projectile : MonoBehaviour
     private float slowAmount;
     private Vector3 targetPosition;
 
-    public void Initialise(Enemy target, float speed, int damage, float aoeRadius, float slowAmount)
+    public void Initialise(Enemy target, float speed, int damage, float aoeRadius, float slowAmount, Sprite sprite)
     {
         this.target = target;
         this.speed = speed;
         this.damage = damage;
         this.aoeRadius = aoeRadius;
         this.slowAmount = slowAmount;
-        targetPosition = Vector3.zero;
+        targetPosition = target != null ? target.transform.position : Vector3.zero;
+        GetComponent<SpriteRenderer>().sprite = sprite;
+        RotateTowards(targetPosition);
+    }
+
+    void RotateTowards(Vector3 pos)
+    {
+        Vector3 dir = pos - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     void ReturnToPool()
@@ -60,6 +69,7 @@ public class Projectile : MonoBehaviour
         }
 
         targetPosition = target.transform.position;
+        RotateTowards(targetPosition);
         MoveTowardsEnemyPosition();
 
         if (transform.position == targetPosition)
